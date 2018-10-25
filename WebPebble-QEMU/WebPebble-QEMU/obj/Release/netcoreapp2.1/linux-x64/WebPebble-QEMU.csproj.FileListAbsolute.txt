@@ -1,0 +1,11 @@
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\bin\Release\netcoreapp2.1\linux-x64\config.json
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\bin\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.deps.json
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\bin\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.runtimeconfig.json
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\bin\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.runtimeconfig.dev.json
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\bin\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.dll
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\bin\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.pdb
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\obj\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.csproj.CoreCompileInputs.cache
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\obj\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.AssemblyInfoInputs.cache
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\obj\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.AssemblyInfo.cs
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\obj\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.dll
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\obj\Release\netcoreapp2.1\linux-x64\WebPebble-QEMU.pdb
