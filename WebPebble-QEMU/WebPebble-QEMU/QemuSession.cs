@@ -51,7 +51,7 @@ namespace WebPebble_QEMU
             args += "-serial null ";
             args += "-serial tcp::" + qemu_port + ",server,nowait ";
             args += "-serial tcp::" + qemu_serial_port + ",server ";
-            args += "-drive file="+ fp.micro_flash +",if=pflash,format=raw";
+            args += "-drive file="+ fp.micro_flash +",if=pflash,format=raw ";
             args += "-gdb tcp::" + qemu_gdb_port + ",server ";
             //Get the command line arguments from the specific platform.
             foreach (string ss in fp.args)
