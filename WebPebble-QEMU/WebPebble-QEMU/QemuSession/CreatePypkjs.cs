@@ -17,8 +17,7 @@ namespace WebPebble_QEMU
             //Run some yucky Python code.
             //Get platform.
             FlashPair fp = Program.config.flash_bins["basalt"];
-            //Create persist dir.
-            string persist = Program.config.persist_dir.Replace("SESSION", unique_sessionId);
+            string persist = persist_dir + "pypkjs/";
             Directory.CreateDirectory(persist);
             //Create arguments
             string args = "--qemu localhost:"+qemu_port.ToString()+" ";
