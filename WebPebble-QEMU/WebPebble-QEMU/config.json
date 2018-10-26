@@ -9,7 +9,7 @@
       "args": [
         "-machine pebble-snowy-bb",
         "-cpu cortex-m4",
-        "-pflash format=raw,file=qemu_spi_flash"
+        "-drive file=qemu_spi_flash,if=pflash,format=raw"
       ]
     }
   }
