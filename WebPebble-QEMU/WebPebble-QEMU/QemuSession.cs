@@ -29,7 +29,6 @@ namespace WebPebble_QEMU
             //Start QEMU
             s.SpawnProcess();
             //Begin trying to connect.
-            Thread.Sleep(1000);
             s.WaitForQemu();
 
             return s;
@@ -74,11 +73,11 @@ namespace WebPebble_QEMU
             {
                 try
                 {
-                    Thread.Sleep(200);
+                    Thread.Sleep(50);
                     qemu_serial_client = new Socket(SocketType.Stream, ProtocolType.Tcp);
                     qemu_serial_client.ReceiveTimeout = 20000;
                     IAsyncResult result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_serial_port, null, null);
-                    bool success = result.AsyncWaitHandle.WaitOne(5000, true);
+                    bool success = result.AsyncWaitHandle.WaitOne(200, true);
                     if (qemu_serial_client.Connected)
                     {
                         qemu_serial_client.EndConnect(result);
@@ -98,7 +97,7 @@ namespace WebPebble_QEMU
             }
             Log("Got client connection. Waiting for ready.");
             //Ignore messages until boot is done. This is a bit gross
-            byte[] buf = new byte[512];
+            byte[] buf = new byte[2];
             qemu_serial_client.Receive(buf);
             Log(Encoding.ASCII.GetString(buf));
         }
