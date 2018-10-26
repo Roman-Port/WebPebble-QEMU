@@ -18,7 +18,7 @@ namespace WebPebble_QEMU
             QemuSession s = null;
             try
             {
-                s = QemuSession.SpawnSession(3);
+                s = QemuSession.SpawnSession(2);
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + "@" + ex.StackTrace);
