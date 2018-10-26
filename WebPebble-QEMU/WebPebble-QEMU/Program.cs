@@ -45,7 +45,7 @@ namespace WebPebble_QEMU
         static void StartWebsockify()
         {
             string args = "10.0.1.52:43188 10.0.1.52:5901";
-            ProcessStartInfo startInfo = new ProcessStartInfo() { FileName = config.qemu_binary, Arguments = args };
+            ProcessStartInfo startInfo = new ProcessStartInfo() { FileName = config.websockify_binary, Arguments = args };
             websockify_process = new Process() { StartInfo = startInfo, };
             websockify_process.Start();
         }
