@@ -53,6 +53,7 @@ namespace WebPebble_QEMU
             args += "-serial tcp::" + qemu_serial_port + ",server ";
             args += "-drive file="+ fp.micro_flash +",if=pflash,format=raw ";
             args += "-gdb tcp::" + qemu_gdb_port + ",server ";
+            args += "-vnc :"+sessionId.ToString()+" "; //This pushes the video output to vnc. See more here: https://stackoverflow.com/questions/22967925/running-qemu-remotely-via-ssh
             //Get the command line arguments from the specific platform.
             foreach (string ss in fp.args)
             {
