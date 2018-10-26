@@ -4,12 +4,13 @@
   "flash_bins": {
     "basalt": {
       "micro_flash": "/home/roman/webpebble/qemu/flash/basalt/qemu_micro_flash.bin",
-      "spi_flash": "/home/roman/webpebble/qemu/flash/basalt/qemu_spi_flash.bin.bz2",
+      "spi_flash": "/home/roman/webpebble/qemu/flash/basalt/qemu_spi_flash.bin",
       "layouts": "/home/roman/webpebble/qemu/flash/basalt/layouts.json",
       "args": [
         "-machine pebble-snowy-bb",
         "-cpu cortex-m4",
-        "-pflash qemu_spi_flash"
+        "-pflash qemu_spi_flash",
+        "-format raw"
       ]
     }
   }
