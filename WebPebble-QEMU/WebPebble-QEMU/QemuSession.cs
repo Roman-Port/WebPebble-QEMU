@@ -46,7 +46,6 @@ namespace WebPebble_QEMU
             //Create command line arguments.
             string args = "-rtc base=localtime ";
             args += "-serial null ";
-            args += "-serial null ";
             args += "-serial tcp::" + qemu_port + ",server,nowait ";
             args += "-serial tcp::" + qemu_serial_port + ",server ";
             args += "-drive file="+ fp.micro_flash +",if=pflash,format=raw ";
@@ -67,7 +66,7 @@ namespace WebPebble_QEMU
         private void WaitForQemu()
         {
             //Keep trying to connect to QEMU.
-            Log("Waiting for firmware to boot.");
+            Log("Waiting for firmware to boot. Using IP "+qemu_serial_port.ToString());
             int i = 0;
             for (i = 0; i<40; i++)
             {
@@ -76,7 +75,7 @@ namespace WebPebble_QEMU
                     Thread.Sleep(50);
                     qemu_serial_client = new Socket(SocketType.Stream, ProtocolType.Tcp);
                     qemu_serial_client.ReceiveTimeout = 20000;
-                    IAsyncResult result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_port, null, null);
+                    IAsyncResult result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_serial_port, null, null);
                     bool success = result.AsyncWaitHandle.WaitOne(200, true);
                     if (qemu_serial_client.Connected)
                     {
