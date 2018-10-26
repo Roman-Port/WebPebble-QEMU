@@ -1,6 +1,6 @@
 {
   "qemu_binary": "/home/roman/webpebble/qemu/qemu/pebble-qemu/arm-softmmu/qemu-system-arm",
-  "private_port_start": 25567,
+  "private_port_start": 61209,
   "flash_bins": {
     "basalt": {
       "micro_flash": "/home/roman/webpebble/qemu/flash/basalt/qemu_micro_flash.bin",
