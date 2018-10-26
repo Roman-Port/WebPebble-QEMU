@@ -1,5 +1,5 @@
 {
-  "qemu_binary": "/home/roman/webpebble/pebble_sdk/pebble-sdk-4.5-linux64/bin/qemu-pebble",
+  "qemu_binary": "/home/roman/webpebble/qemu/qemu/pebble-qemu/arm-softmmu/qemu-system-arm",
   "private_port_start": 25567,
   "flash_bins": {
     "basalt": {
