@@ -19,9 +19,7 @@ namespace WebPebble_QEMU
         public int qemu_gdb_port;
 
         //SOCKETS
-        public TcpClient qemu_client;
-        public TcpClient qemu_serial_client;
-        public TcpClient qemu_gdb_client;
+        public Socket qemu_serial_client;
 
         public static QemuSession SpawnSession(int sessionId)
         {
@@ -77,18 +75,16 @@ namespace WebPebble_QEMU
                 try
                 {
                     Thread.Sleep(200);
-                    qemu_serial_client = new TcpClient();
-                    qemu_serial_client.ReceiveTimeout = 50000;
-                    qemu_serial_client.SendTimeout = 50000;
-                    var result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_serial_port, null, null);
-                    bool ok = result.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(1000));
-                    if (!ok)
+                    qemu_serial_client = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                    qemu_serial_client.ReceiveTimeout = 20000;
+                    IAsyncResult result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_serial_port, null, null);
+                    bool success = result.AsyncWaitHandle.WaitOne(5000, true);
+                    if (qemu_serial_client.Connected)
                     {
-                        throw new Exception("Timed out, will retry.");
+                        qemu_serial_client.EndConnect(result);
+                        break;
                     }
-                    //Connected fine.
-                    qemu_serial_client.EndConnect(result);
-                    break;
+                    throw new Exception("Timed out, trying again.");
                 } catch (Exception ex)
                 {
                     Log("Connection failed on attempt #" + i.ToString() + "; " + ex.Message);
@@ -102,23 +98,9 @@ namespace WebPebble_QEMU
             }
             Log("Got client connection. Waiting for ready.");
             //Ignore messages until boot is done. This is a bit gross
-            //Sorry guys there was a spider on my screen https://cdn.discordapp.com/attachments/278168928763772929/505193580600754187/20181025_203655.jpg
             byte[] buf = new byte[512];
-            i = 0;
-            using (NetworkStream s = qemu_serial_client.GetStream())
-            {
-                while(true)
-                {
-                    //Read any bytes in.
-                    int a = qemu_serial_client.Available;
-                    if(a > 0)
-                    {
-                        s.Read(buf, i, a);
-                        i += a;
-                        Log(Encoding.ASCII.GetString(buf));
-                    }
-                }
-            }
+            qemu_serial_client.Receive(buf);
+            Log(Encoding.ASCII.GetString(buf));
         }
 
         private void Log(string msg)
