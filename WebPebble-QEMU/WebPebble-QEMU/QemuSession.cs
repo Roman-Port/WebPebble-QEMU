@@ -76,7 +76,7 @@ namespace WebPebble_QEMU
                     Thread.Sleep(50);
                     qemu_serial_client = new Socket(SocketType.Stream, ProtocolType.Tcp);
                     qemu_serial_client.ReceiveTimeout = 20000;
-                    IAsyncResult result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_serial_port, null, null);
+                    IAsyncResult result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_port, null, null);
                     bool success = result.AsyncWaitHandle.WaitOne(200, true);
                     if (qemu_serial_client.Connected)
                     {
