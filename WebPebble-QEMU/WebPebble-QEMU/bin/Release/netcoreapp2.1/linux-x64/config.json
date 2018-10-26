@@ -1,9 +1,16 @@
 {
   "qemu_binary": "/home/roman/webpebble/pebble_sdk/pebble-sdk-4.5-linux64/bin/qemu-pebble",
+  "private_port_start": 25567,
   "flash_bins": {
     "basalt": {
-      "micro_flash": "",
-      "spi_flash": ""
+      "micro_flash": "/home/roman/webpebble/qemu/flash/basalt/qemu_micro_flash.bin",
+      "spi_flash": "/home/roman/webpebble/qemu/flash/basalt/qemu_spi_flash.bin",
+      "layouts": "/home/roman/webpebble/qemu/flash/basalt/layouts.json",
+      "args": [
+        "-machine pebble-snowy-bb",
+        "-cpu cortex-m4",
+        "-pflash qemu_spi_flash"
+      ]
     }
   }
 }

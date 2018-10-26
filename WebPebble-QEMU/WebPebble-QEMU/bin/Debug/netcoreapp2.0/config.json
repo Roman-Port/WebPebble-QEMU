@@ -1,0 +1,9 @@
+{
+  "qemu_binary": "/home/roman/webpebble/pebble_sdk/pebble-sdk-4.5-linux64/bin/qemu-pebble",
+  "flash_bins": {
+    "basalt": {
+      "micro_flash": "",
+      "spi_flash": ""
+    }
+  }
+}
