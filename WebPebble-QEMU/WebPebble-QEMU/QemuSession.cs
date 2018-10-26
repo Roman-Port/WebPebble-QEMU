@@ -56,7 +56,7 @@ namespace WebPebble_QEMU
             //Get the command line arguments from the specific platform.
             foreach (string ss in fp.args)
             {
-                args += ss + " ";
+                args += ss.Replace("qemu_spi_flash",fp.spi_flash) + " ";
             }
             //Run the QEMU process.
             ProcessStartInfo startInfo = new ProcessStartInfo() { FileName = Program.config.qemu_binary, Arguments = args };
