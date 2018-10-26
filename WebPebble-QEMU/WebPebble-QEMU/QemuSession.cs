@@ -52,10 +52,10 @@ namespace WebPebble_QEMU
             s.SpawnProcess();
             //Begin trying to connect.
             s.WaitForQemu();
-            Thread.Sleep(2000);
+            Console.ReadLine();
             //Start Pypkjs.
             s.StartPypjks();
-
+            Console.ReadLine();
             return s;
         }
 

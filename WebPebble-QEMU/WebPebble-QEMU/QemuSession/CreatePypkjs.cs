@@ -20,7 +20,7 @@ namespace WebPebble_QEMU
             string persist = persist_dir + "pypkjs/";
             Directory.CreateDirectory(persist);
             //Create arguments
-            string args = "--qemu localhost:"+qemu_serial_port.ToString()+" ";
+            string args = "--qemu localhost:"+qemu_port.ToString()+" ";
             args += "--port " + pypkjs_port.ToString() + " ";
             args += "--persist " + persist + " ";
             args += "--layout " + fp.layouts + " ";
