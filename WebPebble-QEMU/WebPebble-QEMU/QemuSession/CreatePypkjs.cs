@@ -16,7 +16,7 @@ namespace WebPebble_QEMU
         {
             //Run some yucky Python code.
             //Get platform.
-            FlashPair fp = Program.config.flash_bins["basalt"];
+            FlashPair fp = Program.config.flash_bins[platform];
             string persist = persist_dir + "pypkjs/";
             Directory.CreateDirectory(persist);
             //Create arguments

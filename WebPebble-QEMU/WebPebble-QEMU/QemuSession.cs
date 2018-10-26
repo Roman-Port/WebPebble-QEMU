@@ -16,7 +16,7 @@ namespace WebPebble_QEMU
         public int sessionId;
         public string unique_sessionId;
         public string persist_dir;
-
+        public string platform;
 
         //IMAGES
         public string qemu_spi_image;
@@ -31,12 +31,13 @@ namespace WebPebble_QEMU
         //SOCKETS
         public Socket qemu_serial_client;
 
-        public static QemuSession SpawnSession(int sessionId)
+        public static QemuSession SpawnSession(int sessionId, string platform)
         {
             //Create the QEMU session and object here.
             QemuSession s = new QemuSession();
             s.sessionId = sessionId;
             s.unique_sessionId = DateTime.UtcNow.Ticks.ToString();
+            s.platform = platform;
             //Choose ports.
             int basePort = (sessionId * 4) + Program.config.private_port_start;
             s.qemu_port = basePort;
@@ -52,11 +53,26 @@ namespace WebPebble_QEMU
             s.SpawnProcess();
             //Begin trying to connect.
             s.WaitForQemu();
-            Console.ReadLine();
+            Thread.Sleep(1000);
             //Start Pypkjs.
             s.StartPypjks();
-            Console.ReadLine();
             return s;
+        }
+
+        public void EndSession()
+        {
+            //Clean up and end this session.
+            Log("Session end command issued.");
+            //Terminate PYPJKS.
+            pypkjs_process.Kill();
+            Log("Killed Pypkjs.");
+            //Kill QEMU
+            qemu_process.Kill();
+            Log("Killed QEMU.");
+            //Delete the session folder.
+            Directory.Delete(persist_dir, true);
+            Log("Deleted session directory.");
+            Log("Goodbye, world!"); //haha very clever
         }
 
         private void Log(string msg)

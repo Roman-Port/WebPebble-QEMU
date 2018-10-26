@@ -15,7 +15,7 @@ namespace WebPebble_QEMU
         private void SpawnProcess()
         {
             //Get objects, such as the flash locations.
-            FlashPair fp = Program.config.flash_bins["basalt"];
+            FlashPair fp = Program.config.flash_bins[platform];
             //Create command line arguments.
             string args = "-rtc base=localtime ";
             args += "-serial null ";
@@ -40,7 +40,7 @@ namespace WebPebble_QEMU
         {
             //Copy images for spi and micro.
             //Get platform.
-            FlashPair fp = Program.config.flash_bins["basalt"];
+            FlashPair fp = Program.config.flash_bins[platform];
             //Generate paths.
             qemu_spi_image = persist_dir + "pebble_spi_image.bin";
             qemu_micro_image = persist_dir + "pebble_micro_image.bin";

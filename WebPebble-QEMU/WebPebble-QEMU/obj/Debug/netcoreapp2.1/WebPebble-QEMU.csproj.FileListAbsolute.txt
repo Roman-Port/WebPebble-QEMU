@@ -6,3 +6,4 @@ C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebb
 C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\obj\Debug\netcoreapp2.1\WebPebble-QEMU.csproj.CoreCompileInputs.cache
 C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\obj\Debug\netcoreapp2.1\WebPebble-QEMU.AssemblyInfoInputs.cache
 C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\obj\Debug\netcoreapp2.1\WebPebble-QEMU.AssemblyInfo.cs
+C:\Users\Roman\source\repos\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\WebPebble-QEMU\bin\Debug\netcoreapp2.1\config.json
