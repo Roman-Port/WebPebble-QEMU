@@ -76,15 +76,17 @@ namespace WebPebble_QEMU
                 {
                     Thread.Sleep(200);
                     qemu_serial_client = new TcpClient();
-                    qemu_serial_client.ReceiveTimeout = 500;
-                    qemu_serial_client.SendTimeout = 500;
-                    if (qemu_serial_client.ConnectAsync(IPAddress.Loopback, qemu_serial_port).Wait(1000))
+                    qemu_serial_client.ReceiveTimeout = 5000;
+                    qemu_serial_client.SendTimeout = 5000;
+                    var result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_serial_port, null, null);
+                    bool ok = result.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(1000));
+                    if (!ok)
                     {
-                        break;
-                    } else
-                    {
-                        throw new Exception("Timed out.");
+                        throw new Exception("Timed out, will retry.");
                     }
+                    //Connected fine.
+                    qemu_serial_client.EndConnect(result);
+                    break;
                 } catch (Exception ex)
                 {
                     Log("Connection failed on attempt #" + i.ToString() + "; " + ex.Message);
