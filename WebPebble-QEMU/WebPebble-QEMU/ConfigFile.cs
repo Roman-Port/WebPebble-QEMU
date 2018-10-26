@@ -9,6 +9,7 @@ namespace WebPebble_QEMU
         public string qemu_binary;
         public string pypkjs_binary;
         public int max_sessions;
+        public string websockify_binary;
 
         public string persist_dir;
 
