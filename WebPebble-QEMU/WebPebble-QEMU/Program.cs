@@ -23,7 +23,7 @@ namespace WebPebble_QEMU
             {
                 Console.WriteLine(ex.Message + "@" + ex.StackTrace);
             }
-            s.process.Kill();
+            s.qemu_process.Kill();
         }
     }
 }

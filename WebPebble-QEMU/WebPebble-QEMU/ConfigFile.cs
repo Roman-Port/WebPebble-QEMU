@@ -7,6 +7,9 @@ namespace WebPebble_QEMU
     class ConfigFile
     {
         public string qemu_binary;
+        public string pypkjs_binary;
+
+        public string persist_dir;
 
         public Dictionary<string, FlashPair> flash_bins;
 

@@ -1,6 +1,8 @@
 {
   "qemu_binary": "/home/roman/webpebble/qemu/qemu/pebble-qemu/arm-softmmu/qemu-system-arm",
   "private_port_start": 61209,
+  "pypkjs_binary": "/home/roman/webpebble/pypkjs/pypkjs/phonesim.py",
+  "persist_dir": "/home/roman/webpebble/qemu/user_content/SESSION/",
   "flash_bins": {
     "basalt": {
       "micro_flash": "/home/roman/webpebble/qemu/flash/basalt/qemu_micro_flash.bin",
