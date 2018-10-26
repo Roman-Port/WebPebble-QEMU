@@ -26,7 +26,7 @@ namespace WebPebble_QEMU
             args += "--layout " + fp.layouts + " ";
             args += "--debug ";
             //Run
-            ProcessStartInfo startInfo = new ProcessStartInfo() { FileName = "/usr/bin/python3", Arguments = Program.config.pypkjs_binary + " " + args };
+            ProcessStartInfo startInfo = new ProcessStartInfo() { FileName = "/usr/bin/python", Arguments = Program.config.pypkjs_binary + " " + args };
             pypkjs_process = new Process() { StartInfo = startInfo, };
             pypkjs_process.Start();
         }
