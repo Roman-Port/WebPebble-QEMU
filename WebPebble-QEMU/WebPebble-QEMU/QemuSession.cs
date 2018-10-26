@@ -44,7 +44,7 @@ namespace WebPebble_QEMU
             int basePort = (sessionId * 3) + Program.config.private_port_start;
             qemu_port = basePort;
             qemu_serial_port = basePort + 1;
-            qemu_gdb_port = basePort + 1;
+            qemu_gdb_port = basePort + 2;
             //Create command line arguments.
             string args = "-rtc base=localtime ";
             args += "-serial null ";
