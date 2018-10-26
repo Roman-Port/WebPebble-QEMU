@@ -10,6 +10,7 @@ namespace WebPebble_QEMU
         public string pypkjs_binary;
         public int max_sessions;
         public string websockify_binary;
+        public string local_name; //IP address
 
         public string persist_dir;
 
