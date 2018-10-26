@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -71,17 +72,22 @@ namespace WebPebble_QEMU
             //Ignore messages until boot is done. This is a bit gross
             List<byte> buf = new List<byte>();
             i = 0;
-            while (true)
+            using(FileStream fs = new FileStream("/home/roman/temp_dump.txt", FileMode.OpenOrCreate))
             {
-                byte[] mini_buf = new byte[1];
-                qemu_serial_client.Receive(mini_buf, 0, 1, SocketFlags.None);
-                buf.Add(mini_buf[0]);
-                i++;
-                //Check if QEMU is telling us we're ready.
-                string s = Encoding.ASCII.GetString(buf.ToArray());
-                if (s.Contains("<SDK Home>") || s.Contains("<Launcher>") || s.Contains("Ready for communication"))
-                    break;
-                //Log(Encoding.ASCII.GetString(buf));
+                while (true)
+                {
+                    byte[] mini_buf = new byte[1];
+                    qemu_serial_client.Receive(mini_buf, 0, 1, SocketFlags.None);
+                    fs.Write(mini_buf, 0, 1);
+                    buf.Add(mini_buf[0]);
+                    i++;
+                    //Check if QEMU is telling us we're ready.
+                    string s = Encoding.ASCII.GetString(buf.ToArray());
+                    if (s.Contains("<SDK Home>") || s.Contains("<Launcher>") || s.Contains("Ready for communication"))
+                        break;
+                    
+                    //Log(Encoding.ASCII.GetString(buf));
+                }
             }
             //We're ready.
         }
