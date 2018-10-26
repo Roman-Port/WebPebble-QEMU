@@ -154,7 +154,7 @@ namespace WebPebble_QEMU.Ws
             //The emulator has started. Let the client know and provide some extra data.
             status = EmulatorStatus.Idle;
             OnEmulatorBoot b = new OnEmulatorBoot();
-            b.vnc_addr = this.Context.Host + ":59" + sessionId.ToString("00");
+            b.vnc_addr = this.Context.Host.Split(':')[0] + ":" + session.websockify_port.ToString();
             SendData(b, WebReplyType.OnEmulatorBoot);
         }
     }

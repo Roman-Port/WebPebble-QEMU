@@ -11,8 +11,12 @@ namespace WebPebble_QEMU
 {
     public partial class QemuSession
     {
+        //PROCESSES
         public Process qemu_process;
         public Process pypkjs_process;
+        public Process websockify_process;
+
+        //MAIN
         public int sessionId;
         public string unique_sessionId;
         public string persist_dir;
@@ -27,6 +31,7 @@ namespace WebPebble_QEMU
         public int qemu_serial_port;
         public int qemu_gdb_port;
         public int pypkjs_port;
+        public int websockify_port;
 
         //SOCKETS
         public Socket qemu_serial_client;
@@ -39,11 +44,12 @@ namespace WebPebble_QEMU
             s.unique_sessionId = DateTime.UtcNow.Ticks.ToString();
             s.platform = platform;
             //Choose ports.
-            int basePort = (sessionId * 4) + Program.config.private_port_start;
+            int basePort = (sessionId * 5) + Program.config.private_port_start;
             s.qemu_port = basePort;
             s.qemu_serial_port = basePort + 1;
             s.qemu_gdb_port = basePort + 2;
             s.pypkjs_port = basePort + 3;
+            s.websockify_port = basePort + 4;
             //Create persist dir.
             s.persist_dir = Program.config.persist_dir.Replace("SESSION", s.unique_sessionId);
             Directory.CreateDirectory(s.persist_dir);
@@ -53,6 +59,9 @@ namespace WebPebble_QEMU
             s.SpawnProcess();
             //Begin trying to connect.
             s.WaitForQemu();
+            //Start Websockify.
+            s.CreateWebsockify();
+            //Wait.
             Thread.Sleep(1000);
             //Start Pypkjs.
             s.StartPypjks();
@@ -69,6 +78,9 @@ namespace WebPebble_QEMU
             //Kill QEMU
             qemu_process.Kill();
             Log("Killed QEMU.");
+            //Kill websockify.
+            websockify_process.Kill();
+            Log("Killed Websockify.");
             //Delete the session folder.
             Directory.Delete(persist_dir, true);
             Log("Deleted session directory.");
