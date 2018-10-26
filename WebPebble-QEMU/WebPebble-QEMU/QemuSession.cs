@@ -31,6 +31,7 @@ namespace WebPebble_QEMU
             //Start QEMU
             s.SpawnProcess();
             //Begin trying to connect.
+            Thread.Sleep(1000);
             s.WaitForQemu();
 
             return s;
@@ -70,14 +71,15 @@ namespace WebPebble_QEMU
         {
             //Keep trying to connect to QEMU.
             Log("Waiting for firmware to boot.");
-            for(int i = 0; i<40; i++)
+            int i = 0;
+            for (i = 0; i<40; i++)
             {
                 try
                 {
                     Thread.Sleep(200);
                     qemu_serial_client = new TcpClient();
-                    qemu_serial_client.ReceiveTimeout = 5000;
-                    qemu_serial_client.SendTimeout = 5000;
+                    qemu_serial_client.ReceiveTimeout = 50000;
+                    qemu_serial_client.SendTimeout = 50000;
                     var result = qemu_serial_client.BeginConnect(IPAddress.Loopback, qemu_serial_port, null, null);
                     bool ok = result.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(1000));
                     if (!ok)
@@ -99,12 +101,23 @@ namespace WebPebble_QEMU
                 throw new Exception("Timed out while waiting for QEMU firmware to boot.");
             }
             Log("Got client connection. Waiting for ready.");
-            //Ignore messages until boot is done.
-            byte[] buf = new byte[256];
-            while(true)
+            //Ignore messages until boot is done. This is a bit gross
+            //Sorry guys there was a spider on my screen https://cdn.discordapp.com/attachments/278168928763772929/505193580600754187/20181025_203655.jpg
+            byte[] buf = new byte[512];
+            i = 0;
+            using (NetworkStream s = qemu_serial_client.GetStream())
             {
-                qemu_serial_client.Client.Receive(buf);
-                Log("Got " + buf.Length.ToString() + " bytes of data: " + Encoding.ASCII.GetString(buf).ToString());
+                while(true)
+                {
+                    //Read any bytes in.
+                    int a = qemu_serial_client.Available;
+                    if(a > 0)
+                    {
+                        s.Read(buf, i, a);
+                        i += a;
+                        Log(Encoding.ASCII.GetString(buf));
+                    }
+                }
             }
         }
 
