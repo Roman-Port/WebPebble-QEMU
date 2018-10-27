@@ -1,24 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebSocketSharp.Server;
 using System.Linq;
-using WebSocketSharp;
 using Newtonsoft.Json;
 using WebPebble_QEMU.Ws.Entities;
+using System.Net.WebSockets;
+using Microsoft.AspNetCore.Http;
+using System.Threading;
 
 namespace WebPebble_QEMU.Ws
 {
-    public class WebService : WebSocketBehavior
+    public class WebService
     {
         public EmulatorStatus status = EmulatorStatus.Waiting;
         public QemuSession session;
         public int sessionId = -1;
 
-        protected override void OnMessage(MessageEventArgs e)
+        private WebSocket sock;
+
+        public WebService(HttpContext e, WebSocket s)
+        {
+            //Take in the web socket and put it in the recieve loop.
+            this.sock = s;
+            
+            while (true)
+            {
+                var buffer = new byte[1024 * 4];
+                WebSocketReceiveResult result = s.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None).GetAwaiter().GetResult();
+                //Check if this is a closure.
+                if (result.CloseStatus.HasValue)
+                    break;
+                //Convert this to text.
+                string d = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                //Call
+                OnMessage(d);
+
+            }
+            //We've closed.
+            OnClose();
+        }
+
+        void OnMessage(string e)
         {
             //Parse JSON.
-            WebRequest req = JsonConvert.DeserializeObject<WebRequest>(e.Data);
+            WebRequest req = JsonConvert.DeserializeObject<WebRequest>(e);
             //Decide what to do
             switch(req.type)
             {
@@ -26,26 +51,12 @@ namespace WebPebble_QEMU.Ws
                     OnBootRequest(req);
                     return;
             }
-            base.OnMessage(e);
         }
 
-        protected override void OnError(WebSocketSharp.ErrorEventArgs e)
-        {
-            OnKillEmu();
-            base.OnError(e);
-        }
-
-        protected override void OnOpen()
-        {
-            Program.connected.Add(this);
-            base.OnOpen();
-        }
-
-        protected override void OnClose(CloseEventArgs e)
+        void OnClose()
         {
             OnKillEmu();
             Program.connected.Remove(this);
-            base.OnClose(e);
         }
 
         private void SendData<T>(T data, WebReplyType type)
@@ -53,7 +64,8 @@ namespace WebPebble_QEMU.Ws
             var d = new WebReply<T>();
             d.data = data;
             d.type = type;
-            Send(JsonConvert.SerializeObject(d));
+            byte[] buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(d));
+            sock.SendAsync(new ArraySegment<byte>(buffer, 0, buffer.Length),  WebSocketMessageType.Text, true, CancellationToken.None).GetAwaiter().GetResult();
         }
 
         /* Inner commands */
