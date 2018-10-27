@@ -75,7 +75,7 @@ namespace WebPebble_QEMU
                 .UseKestrel(options =>
                 {
                     IPAddress addr = IPAddress.Parse(Program.config.local_name);
-                    options.Listen(addr, 80);
+                    options.Listen(addr, 43189);
                     /*options.Listen(addr, 443, listenOptions =>
                     {
                         listenOptions.UseHttps(LibRpwsCore.config.ssl_cert_path, "");
