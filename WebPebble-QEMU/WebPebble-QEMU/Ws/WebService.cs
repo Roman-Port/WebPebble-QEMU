@@ -37,12 +37,14 @@ namespace WebPebble_QEMU.Ws
 
         protected override void OnOpen()
         {
+            Program.connected.Add(this);
             base.OnOpen();
         }
 
         protected override void OnClose(CloseEventArgs e)
         {
             OnKillEmu();
+            Program.connected.Remove(this);
             base.OnClose(e);
         }
 

@@ -14,7 +14,7 @@
       "args": [
         "-machine pebble-bb2",
         "-cpu cortex-m3",
-        "-drive file=qemu_spi_flash,if=mtdblock,format=raw"
+        "-drive file=qemu_spi_flash,if=pflash,format=raw"
       ]
     },
     "basalt": {
@@ -44,7 +44,7 @@
       "args": [
         "-machine pebble-silk-bb",
         "-cpu cortex-m4",
-        "-drive file=qemu_spi_flash,if=mtdblock,format=raw"
+        "-drive file=qemu_spi_flash,if=pflash,format=raw"
       ]
     },
     "emery": {

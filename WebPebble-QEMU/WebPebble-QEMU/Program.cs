@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -14,6 +15,8 @@ namespace WebPebble_QEMU
 
         public static bool[] open_ids;
 
+        public static List<Ws.WebService> connected = new List<Ws.WebService>();
+
         static void Main(string[] args)
         {
             Console.WriteLine("Starting QEMU WebPebble...");
@@ -26,7 +29,7 @@ namespace WebPebble_QEMU
                 open_ids[i] = false;
             //Start the WebSocket server.
             Console.WriteLine("Starting WebSocket server...");
-            server = new WebSocketSharp.Server.WebSocketServer(IPAddress.Any, 43187, false);
+            server = new WebSocketSharp.Server.WebSocketServer(IPAddress.Any, 43189, false);
             server.ReuseAddress = true;
             server.AddWebSocketService<Ws.WebService>("/session");
             server.Start();
