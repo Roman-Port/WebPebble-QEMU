@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1/linux-x64",
-    "signature": "9deb18ce3664324f59090daeeda0bc748b6626dc"
+    "signature": "a83ba5de174da631c410235481bbcb5f10495526"
   },
   "compilationOptions": {},
   "targets": {
@@ -10,7 +10,7 @@
       "WebPebble-QEMU/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
-          "WebSocketSharp-netstandard": "1.0.1"
+          "WebSocketSharp": "1.0.3-rc11"
         },
         "runtime": {
           "WebPebble-QEMU.dll": {}
@@ -24,11 +24,11 @@
           }
         }
       },
-      "WebSocketSharp-netstandard/1.0.1": {
+      "WebSocketSharp/1.0.3-rc11": {
         "runtime": {
-          "lib/netstandard2.0/websocket-sharp.dll": {
-            "assemblyVersion": "1.0.1.0",
-            "fileVersion": "1.0.1.0"
+          "lib/websocket-sharp.dll": {
+            "assemblyVersion": "1.0.2.59611",
+            "fileVersion": "1.0.2.59611"
           }
         }
       }
@@ -47,12 +47,12 @@
       "path": "newtonsoft.json/11.0.2",
       "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
     },
-    "WebSocketSharp-netstandard/1.0.1": {
+    "WebSocketSharp/1.0.3-rc11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-knoinAv31vbdxXdypnzN2MPX5hyntVLWceq6OdWRXkr9zzqp/RWbxSuLFGbkW8De1061URgNAN43BUTlgMx1CA==",
-      "path": "websocketsharp-netstandard/1.0.1",
-      "hashPath": "websocketsharp-netstandard.1.0.1.nupkg.sha512"
+      "sha512": "sha512-7VCF7f7zVMOvLGD8LeGS4DVXc8lOcB6kXnUMeTxigu+PMiU+6wW5Olq2gYrDU8vDRKOwFY+5RyBaLyzb8skEzA==",
+      "path": "websocketsharp/1.0.3-rc11",
+      "hashPath": "websocketsharp.1.0.3-rc11.nupkg.sha512"
     }
   }
 }

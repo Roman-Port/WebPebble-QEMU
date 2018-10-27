@@ -217,13 +217,13 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "WebSocketSharp-netstandard/1.0.1": {
+      "WebSocketSharp/1.0.3-rc11": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/websocket-sharp.dll": {}
+          "lib/websocket-sharp.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/websocket-sharp.dll": {}
+          "lib/websocket-sharp.dll": {}
         }
       }
     }
@@ -720,19 +720,15 @@
         "newtonsoft.json.nuspec"
       ]
     },
-    "WebSocketSharp-netstandard/1.0.1": {
-      "sha512": "knoinAv31vbdxXdypnzN2MPX5hyntVLWceq6OdWRXkr9zzqp/RWbxSuLFGbkW8De1061URgNAN43BUTlgMx1CA==",
+    "WebSocketSharp/1.0.3-rc11": {
+      "sha512": "7VCF7f7zVMOvLGD8LeGS4DVXc8lOcB6kXnUMeTxigu+PMiU+6wW5Olq2gYrDU8vDRKOwFY+5RyBaLyzb8skEzA==",
       "type": "package",
-      "path": "websocketsharp-netstandard/1.0.1",
+      "path": "websocketsharp/1.0.3-rc11",
       "files": [
-        "lib/net35/websocket-sharp.dll",
-        "lib/net35/websocket-sharp.xml",
-        "lib/net45/websocket-sharp.dll",
-        "lib/net45/websocket-sharp.xml",
-        "lib/netstandard2.0/websocket-sharp.dll",
-        "lib/netstandard2.0/websocket-sharp.xml",
-        "websocketsharp-netstandard.1.0.1.nupkg.sha512",
-        "websocketsharp-netstandard.nuspec"
+        "lib/websocket-sharp.dll",
+        "lib/websocket-sharp.xml",
+        "websocketsharp.1.0.3-rc11.nupkg.sha512",
+        "websocketsharp.nuspec"
       ]
     }
   },
@@ -740,7 +736,7 @@
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.NETCore.App >= 2.1.0",
       "Newtonsoft.Json >= 11.0.2",
-      "WebSocketSharp-netstandard >= 1.0.1"
+      "WebSocketSharp >= 1.0.3-rc11"
     ]
   },
   "packageFolders": {
@@ -793,9 +789,9 @@
             "target": "Package",
             "version": "[11.0.2, )"
           },
-          "WebSocketSharp-netstandard": {
+          "WebSocketSharp": {
             "target": "Package",
-            "version": "[1.0.1, )"
+            "version": "[1.0.3-rc11, )"
           }
         },
         "imports": [
@@ -805,5 +801,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'WebSocketSharp 1.0.3-rc11' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
+      "libraryId": "WebSocketSharp",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    }
+  ]
 }
