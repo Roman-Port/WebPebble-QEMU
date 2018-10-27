@@ -52,8 +52,7 @@ namespace WebPebble_QEMU
                     if (context.WebSockets.IsWebSocketRequest)
                     {
                         WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        Ws.WebService ws = new Ws.WebService(context, webSocket);
-                        connected.Add(ws);
+                        await Ws.WebService.OnWebSock(context, webSocket);
                     }
                     else
                     {

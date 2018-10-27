@@ -7,6 +7,7 @@ using WebPebble_QEMU.Ws.Entities;
 using System.Net.WebSockets;
 using Microsoft.AspNetCore.Http;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace WebPebble_QEMU.Ws
 {
@@ -18,26 +19,24 @@ namespace WebPebble_QEMU.Ws
 
         private WebSocket sock;
 
-        public WebService(HttpContext e, WebSocket s)
+        public static async Task OnWebSock(HttpContext e, WebSocket s)
         {
-            //Take in the web socket and put it in the recieve loop.
-            this.sock = s;
-            
-            while (true)
-            {
-                var buffer = new byte[1024 * 4];
-                WebSocketReceiveResult result = s.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None).GetAwaiter().GetResult();
-                //Check if this is a closure.
-                if (result.CloseStatus.HasValue)
-                    break;
-                //Convert this to text.
-                string d = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                //Call
-                OnMessage(d);
+            WebService ss = new WebService();
+            ss.sock = s;
 
+            var buffer = new byte[1024 * 4];
+            WebSocketReceiveResult result = await s.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            while (!result.CloseStatus.HasValue)
+            {
+                //Handle this request.
+                string d = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                ss.OnMessage(d);
+
+                result = await s.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             }
-            //We've closed.
-            OnClose();
+            //We've shut down.
+            ss.OnClose();
+            await s.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
         }
 
         void OnMessage(string e)
